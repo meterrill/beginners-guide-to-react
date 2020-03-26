@@ -1,13 +1,52 @@
 <body>
   <div id="root"></div>
+
+  <!-- Load react, allowing us to create react elements -->
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+
+  <!-- Load react-dom , allowing us to render the elements to the page-->
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+
   <script type="text/javascript">
-    const rootElement = document.getElementById('root')
+    // Select root element
+    const rootElement = document.getElementById('root');
+
+    // Create react element, specifying element type followed by props (properties) object
     const element = React.createElement('div', {
       className: 'container',
-      children: 'Hello World',
-    })
-    ReactDOM.render(element, rootElement)
+      children: 'Hello World' // textContent
+    });
+
+    // Alternatively, the children prop can also be added as a third argument
+    const element2 = React.createElement('div',
+      {
+        className: 'container'
+      },
+      'Hello World'
+    );
+
+    // Additional children props will be added to element.props.children as an array
+    const element3 = React.createElement('div',
+      {
+        className: 'container'
+      },
+      'Hello World',
+      ', Goodbye World'
+    );
+
+    // Or add the array to the children props directly in the object
+    const element4 = React.createElement('div', {
+      className: 'container',
+      children: ['Hello World', ', Goodbye World']
+    });
+
+    // Children can also be used to create additional react elements
+    const element5 = React.createElement('div', {
+      className: 'container',
+      children: React.createElement('span', null, 'Hello', ' World')
+    });
+
+    // Render element to root element
+    ReactDOM.render(element5, rootElement);
   </script>
 </body>
