@@ -4,11 +4,24 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    const element = (
+    // Create react element with multiple child elements
+    const helloElement = React.createElement('span', null, 'Hello')
+    const worldElement = React.createElement('span', null, 'World')
+    const element = React.createElement(React.Fragment, null, helloElement, ' ', worldElement)
+
+    // React fragments allow you to return children without adding extra nodes
+    const element2 = (
+      <React.Fragment>
+        <span>Hello</span> <span>World</span>
+      </React.Fragment>
+    )
+
+    // Shorter syntax for declaring fragments
+    const element3 = (
       <>
         <span>Hello</span> <span>World</span>
       </>
     )
-    ReactDOM.render(element, document.getElementById('root'))
+    ReactDOM.render(element3, document.getElementById('root'))
   </script>
 </body>
