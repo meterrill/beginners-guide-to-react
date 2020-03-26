@@ -4,11 +4,37 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+    // Select root element
     const rootElement = document.getElementById('root')
+
+    // Props can be added to variables
     const children = 'Hello World'
     const className = 'container'
-    const props = {children, className}
-    const element = <div {...props} />
-    ReactDOM.render(element, rootElement)
+
+    // JS expressions can be embedded in JSX with curly braces
+    const element = <div className={className}>{children}</div>
+
+    // Multiple lines should be wrapped in parentheses
+    const element2 = (
+      <div className={className}>
+        {children}
+      </div>
+    );
+
+    // The children prop can also be added as an attribute and the empty tag can be self-closing
+    const element3 = <div className={className} children={children} />
+
+    // Props object can be passed using the spread operator
+    const props = { children, className }
+    const element4 = <div {...props} />
+
+    // Props can also be added with _extends
+    const element5 = <div id="app-root" {...props} />
+
+    // Object.assign allows us to overwrite props by adding the new prop after the spread operator
+    const element6 = <div id="app-root" {...props} className="not-container" />
+
+    // Render element to root element
+    ReactDOM.render(element6, rootElement)
   </script>
 </body>
