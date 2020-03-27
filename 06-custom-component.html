@@ -5,8 +5,8 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
     // Function component
-    function Message({ children }) {
-      return <div className="message">{children}</div>
+    function Message(props) {
+      return <div className="message">{props.children}</div>
     }
 
     // Class component
@@ -31,6 +31,6 @@
       </div>
     )
 
-    ReactDOM.render(element2, document.getElementById('root'))
+    ReactDOM.render(element, document.getElementById('root'))
   </script>
 </body>
