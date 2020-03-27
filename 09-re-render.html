@@ -16,6 +16,7 @@
       )
 
       // React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state
+      // Even though we create an element describing the whole UI tree on every tick, only the text node whose contents have changed gets updated
       ReactDOM.render(element, rootElement)
     }
 
