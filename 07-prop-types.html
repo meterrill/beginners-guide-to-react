@@ -1,22 +1,54 @@
 <body>
   <div id="root"></div>
-  <script src="https://unpkg.com/react@16.12.0/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+  <!-- Load prop-types library -->
   <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
   <script type="text/babel">
     const rootElement = document.getElementById('root')
 
-    function SayHello({firstName, lastName}) {
+    function SayHello({ firstName, lastName }) {
       return (
         <div>
           Hello {firstName} {lastName}!
         </div>
       )
     }
+
+    // Use propTypes for runtime validation (e.g., check for specific JS type)
+    // SayHello.propTypes = {
+    //   // Custom validator for string type
+    //   firstName(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error(`Invalid prop ${propName} supplied to ${componentName}. Validation failed.`)
+    //     }
+    //   }
+    // }
+
+    // Create a PropTypes object to add multiple validators or check multiple props
+    // const PropTypes = {
+    //   // Custom validator for string type
+    //   string(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error(`Invalid prop '${propName}' supplied to '${componentName}'. Validation failed.`)
+    //     }
+    //   }
+
+    //   // Additional validators...
+    // }
+
+    // SayHello.propTypes = {
+    //   firstName: PropTypes.string,
+    //   lastName: PropTypes.string
+    // }
+
+    // The prop-types library creates global variable for PropTypes providing common validators
+    // For performance reasons, propTypes is only checked in development mode
     SayHello.propTypes = {
       firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired
     }
 
     const element = <SayHello firstName={false} />
