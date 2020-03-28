@@ -57,13 +57,13 @@
     //   )
     // }
 
-    // const element2 = (
-    //   <div>
-    //     <Box className="box--small" style={{ backgroundColor: 'lightblue' }}>small lightblue box</Box>
-    //     <Box className="box--medium" style={{ backgroundColor: 'pink' }}>medium lightblue box</Box>
-    //     <Box className="box--large" style={{ backgroundColor: 'orange' }}>large lightblue box</Box>
-    //   </div>
-    // )
+    const element2 = (
+      <div>
+        <Box className="box--small" style={{ backgroundColor: 'lightblue' }}>small lightblue box</Box>
+        <Box className="box--medium" style={{ backgroundColor: 'pink' }}>medium lightblue box</Box>
+        <Box className="box--large" style={{ backgroundColor: 'orange' }}>large lightblue box</Box>
+      </div>
+    )
 
     // Add size prop to the component to further separate styling concerns and className completely from the React element
     function Box({ className = '', style, size, ...rest }) {
