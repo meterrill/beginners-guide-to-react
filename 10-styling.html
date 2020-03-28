@@ -11,46 +11,87 @@
       justify-content: center;
       text-align: center;
     }
+
     .box--large {
       width: 270px;
       height: 270px;
     }
+
     .box--medium {
       width: 180px;
       height: 180px;
     }
+
     .box--small {
       width: 90px;
       height: 90px;
     }
   </style>
   <script type="text/babel">
-    function Box({style, size, className = '', ...rest}) {
+    // In most cases, className should be used to reference classes defined in an external CSS stylesheet
+    // Using the style attribute as the primary means of styling elements is generally not recommended
+    // The style attribute is most often used in React applications to add dynamically-computed styles at render time
+    // The style attribute accepts a JavaScript object with camelCased properties rather than a CSS string
+    const element = (
+      <div>
+        <div className="box box--small" style={{ fontStyle: 'italic', backgroundColor: 'lightblue' }}>small lightblue box</div>
+        <div className="box box--medium" style={{ fontStyle: 'italic', backgroundColor: 'pink' }}>medium lightblue box</div>
+        <div className="box box--large" style={{ fontStyle: 'italic', backgroundColor: 'orange' }}>large lightblue box</div>
+      </div>
+    )
+
+    // Create a reusable Box function component
+    // function Box(props) {
+    //   return <div {...props} />
+    // }
+
+    // Destructure the props object to unpack className and style
+    // Add a default value of '' in case no className prop is passed from the React element
+    // function Box({ className = '', style, ...rest }) {
+    //   return (
+    //     <div
+    //       className={`box ${className}`}
+    //       style={{ fontStyle: 'italic', ...style }}
+    //       {...rest}
+    //     />
+    //   )
+    // }
+
+    // const element2 = (
+    //   <div>
+    //     <Box className="box--small" style={{ backgroundColor: 'lightblue' }}>small lightblue box</Box>
+    //     <Box className="box--medium" style={{ backgroundColor: 'pink' }}>medium lightblue box</Box>
+    //     <Box className="box--large" style={{ backgroundColor: 'orange' }}>large lightblue box</Box>
+    //   </div>
+    // )
+
+    // Add size prop to the component to further separate styling concerns and className completely from the React element
+    function Box({ className = '', style, size, ...rest }) {
       const sizeClassName = size ? `box--${size}` : ''
       return (
         <div
           className={`box ${className} ${sizeClassName}`}
-          style={{fontStyle: 'italic', ...style}}
+          style={{ fontStyle: 'italic', ...style }}
           {...rest}
         />
       )
     }
 
-    const element = (
+    const element3 = (
       <div>
-        <Box size="small" style={{backgroundColor: 'lightblue'}}>
+        <Box size="small" style={{ backgroundColor: 'lightblue' }}>
           small lightblue box
         </Box>
-        <Box size="medium" style={{backgroundColor: 'pink'}}>
+        <Box size="medium" style={{ backgroundColor: 'pink' }}>
           medium pink box
         </Box>
-        <Box size="large" style={{backgroundColor: 'orange'}}>
+        <Box size="large" style={{ backgroundColor: 'orange' }}>
           large orange box
         </Box>
         <Box>sizeless box</Box>
       </div>
     )
 
-    ReactDOM.render(element, document.getElementById('root'))
+    ReactDOM.render(element3, document.getElementById('root'))
   </script>
 </body>
