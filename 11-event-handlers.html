@@ -6,15 +6,29 @@
   <script type="text/babel">
     const rootElement = document.getElementById('root')
 
-    const state = {eventCount: 0, username: ''}
+    const state = { eventCount: 0, username: '' }
 
     function App() {
+      // return (
+      //   <div>
+      //     <p>There have been {state.eventCount} events.</p>
+      //     <p>
+      //       <button onClick={() => setState({ eventCount: state.eventCount + 1 })}>Click Me</button>
+      //     </p>
+      //     <p>You typed: {state.username}</p>
+      //     <p>
+      //       <input onBlur={(event) => setState({ username: event.target.value })} />
+      //     </p>
+      //   </div>
+      // )
+
+      // A common pattern is for an event handlers to be a functions/methods
       function handleClick() {
-        setState({eventCount: state.eventCount + 1})
+        setState({ eventCount: state.eventCount + 1 })
       }
 
       function handleChange(event) {
-        setState({username: event.target.value})
+        setState({ username: event.target.value })
       }
 
       return (
