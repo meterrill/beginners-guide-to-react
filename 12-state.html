@@ -4,9 +4,22 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+    // Hooks are functions that let you “hook into” React state and lifecycle features from function components
+    // Hooks don’t work inside classes — they let you use React without classes
+
     function Greeting() {
+      // useState is a built-in Hook, called inside a function component to add some local state to it
+      // useState returns a pair: the current state value (name) and a function (setName) that lets you update it
+      // The only argument to useState ('') is the initial state and is only used during the first render
+      // const stateArray = React.useState('')
+      // const name = stateArray[0]
+      // const setName = stateArray[1]
+
+      // With array destructuring syntax
       const [name, setName] = React.useState('')
+
       const handleChange = event => setName(event.target.value)
+
       return (
         <div>
           <form>
