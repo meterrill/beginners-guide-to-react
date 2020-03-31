@@ -10,6 +10,10 @@
       )
 
       React.useEffect(() => {
+        // By default, effects fire after every completed render
+        // To optimize the default behavior, add a second argument that is the array of values that the effect depends on
+        // The effect will only be fired if one of its dependencies changes
+        // The exhaustive-deps rule from the eslint-plugin-react-hooks package is recommended, to warn when dependencies are specified incorrectly and suggest a fix
         window.localStorage.setItem('name', name)
       }, [name])
 
