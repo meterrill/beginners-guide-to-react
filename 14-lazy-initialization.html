@@ -6,6 +6,9 @@
   <script type="text/babel">
     function Greeting() {
       const [name, setName] = React.useState(
+        // window.localStorage.getItem('name') || '',
+
+        // By providing an arrow function as the initial value, React uses a lazy initializer feature which is only called during the first render
         () => window.localStorage.getItem('name') || '',
       )
 
