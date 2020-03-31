@@ -4,6 +4,8 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+    // When we want to share logic between two JavaScript functions, we extract it to a third function, and since components and Hooks are functions, this works for them too
+    // A custom Hook is a JavaScript function whose name starts with "use" and that may call other Hooks
     function useLocalStorageState(key, defaultValue = '') {
       const [state, setState] = React.useState(
         () => window.localStorage.getItem(key) || defaultValue,
