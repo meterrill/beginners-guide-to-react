@@ -4,17 +4,24 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+    // The Effect Hook lets you perform side effects in function components (e.g., Data fetching, setting up a subscription, and manually changing the DOM in React components)
+    // They run after React has updated the DOM
+    // Think of the useEffect Hook as React class lifecycle methods componentDidMount, componentDidUpdate, and componentWillUnmount combined
+
     function Greeting() {
+      // Initialize the value of name from local storage (if it exists), otherwise the default value is an empty string
       const [name, setName] = React.useState(
         window.localStorage.getItem('name') || '',
       )
 
+      // Set the name value in local storage to the name value in our state
       React.useEffect(() => {
         window.localStorage.setItem('name', name)
       })
 
       const handleChange = event => setName(event.target.value)
 
+      // Add value prop to input, changing it from uncontrolled to controlled
       return (
         <div>
           <form>
