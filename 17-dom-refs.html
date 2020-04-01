@@ -13,17 +13,15 @@
       height: 150px;
       background-color: red;
       width: 200px;
-      background-image: -webkit-linear-gradient(
-        315deg,
-        #ff00ba 0%,
-        #fae713 100%
-      );
+      background-image: -webkit-linear-gradient(315deg,
+          #ff00ba 0%,
+          #fae713 100%);
       background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
       transform-style: preserve-3d;
       will-change: transform;
-      transform: perspective(1000px) rotateX(0deg) rotateY(0deg)
-        scale3d(1, 1, 1);
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
     }
+
     .tilt-child {
       position: absolute;
       width: 50%;
@@ -34,6 +32,7 @@
       box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
       background-color: white;
     }
+
     .totally-centered {
       width: 100%;
       height: 100%;
@@ -43,10 +42,15 @@
     }
   </style>
   <script type="text/babel">
-    function Tilt({children}) {
+    function Tilt({ children }) {
+      // The useRef Hook creates a mutable ref object whose .current property is initialized to the passed argument (initialValue)
+      // The returned object will persist for the full lifetime of the component
+      // Used to keep track of any value we want to mutate without triggering a re-render of our component
       const tiltRef = React.useRef()
 
       React.useEffect(() => {
+        // React will set its .current property to the corresponding DOM node (or class instance) allowing us direct access to the DOM element (or component instance)
+        // Interacting with the DOM is a side effect, so the reference must be placed inside a useEffect Hook
         const tiltNode = tiltRef.current
         const vanillaTiltOptions = {
           max: 25,
@@ -54,13 +58,17 @@
           glare: true,
           'max-glare': 0.5,
         }
+
         VanillaTilt.init(tiltNode, vanillaTiltOptions)
+
+        // Runs when the component is unmounted and removes all references of our DOM node and event handlers to prevent memory leaks
         return () => {
           tiltNode.vanillaTilt.destroy()
         }
-      }, [])
+      }, []) // Empty dependency array runs when component is initially mounted and never needs to re-run
 
       return (
+        // Refs provide a way to access React elements (or the underlying DOM node)
         <div ref={tiltRef} className="tilt-root">
           <div className="tilt-child">{children}</div>
         </div>
