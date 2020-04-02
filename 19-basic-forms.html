@@ -5,23 +5,43 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
     function UsernameForm() {
+      const usernameInputRef = React.useRef();
+
       function handleSubmit(event) {
-        event.preventDefault()
-        const username = event.target.elements.usernameInput.value
-        alert(`You entered: ${username}`)
+        event.preventDefault();
+
+        console.log(event.target); // console.log() method prints a toString representation of the object
+        console.dir(event.target); // console.dir() method outputs the list of object properties
+
+        // const username = document.querySelectorAll('input').value; // Option #1: Breaks encapsulation of compnents, queries the entire document, and won't scale well if page has multiple inputs
+
+        // const username = event.target[0].value; // Option #2: Relies on the order of elements
+
+        // const username = event.target.elements[0].value; // Option #3: Relies on the order of elements
+
+        const username = event.target.elements.usernameInput.value; // Option #4: Simplest/preferred method
+
+        // const username = usernameInputRef.current.value; // Option #5: // Making a ref for input is valid, but a ref is not really needed in this case, so Option #4 is simplest/preferred method
+
+        alert(`You entered: ${username}`);
       }
 
       return (
+        // By default, forms can be submitted implicitly (pressing the enter key in the input element) or by clicking the submit button
+        // In order to run some JavaScript before the form is submitted, we can account for both actions by adding an onSubmit handler to the form (vs adding an onClick handler on button)
+
+        // By adding htmlFor to our label and id (or name) to our input, we can associate our label/input and improve accessibility
+        // Adding an id (or name) to our input also allows us access through the elements property of the form node
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="usernameInput">Username:</label>
-            <input id="usernameInput" type="text" />
+            <input ref={usernameInputRef} id="usernameInput" type="text" />
           </div>
           <button type="submit">Submit</button>
         </form>
-      )
+      );
     }
 
-    ReactDOM.render(<UsernameForm />, document.getElementById('root'))
+    ReactDOM.render(<UsernameForm />, document.getElementById('root'));
   </script>
 </body>
