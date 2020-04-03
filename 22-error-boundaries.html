@@ -3,40 +3,49 @@
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+
+  <!-- A simple, reusable React error boundary component for React 16+ -->
   <script src="https://unpkg.com/react-error-boundary@1.2.5/dist/umd/react-error-boundary.js"></script>
   <script type="text/babel">
-    const ErrorBoundary = ReactErrorBoundary.ErrorBoundary
+    // // Error boundaries need to be class components
     // class ErrorBoundary extends React.Component {
-    //   state = {error: null}
+    //   state = { error: null };
     //   static getDerivedStateFromError(error) {
-    //     return {error}
+    //     return { error };
     //   }
     //   render() {
-    //     const {error} = this.state
+    //     const { error } = this.state;
     //     if (error) {
-    //       return <this.props.FallbackComponent error={error} />
+    //       return <this.props.FallbackComponent error={error} />;
     //     }
 
-    //     return this.props.children
+    //     return this.props.children;
     //   }
     // }
 
-    function ErrorFallback({error}) {
+    // Replaces error boundary class component in conjunction with react-error-boundary script
+    const ErrorBoundary = ReactErrorBoundary.ErrorBoundary;
+
+    // Fallback UI to be displayed in place of the component tree or element that crashed
+    function ErrorFallback({ error }) {
       return (
         <div>
           <p>Something went wrong:</p>
           <pre>{error.message}</pre>
         </div>
-      )
+      );
     }
 
     function Bomb() {
-      throw new Error('💥 CABOOM 💥')
+      throw new Error('💥 CABOOM 💥');
     }
 
     function App() {
-      const [explode, setExplode] = React.useState(false)
+      const [explode, setExplode] = React.useState(false);
       return (
+        // Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI
+        // Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them
+        // Error boundaries do not catch errors for: event handlers, asynchronous code (e.g. setTimeout or requestAnimationFrame callbacks), server side rendering, or errors thrown in the error boundary itself (rather than its children)
         <div>
           <div>
             <button onClick={() => setExplode(true)}>💣</button>
@@ -47,8 +56,8 @@
             </ErrorBoundary>
           </div>
         </div>
-      )
+      );
     }
-    ReactDOM.render(<App />, document.getElementById('root'))
+    ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
