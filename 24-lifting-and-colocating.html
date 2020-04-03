@@ -4,46 +4,89 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    function Name({name, onNameChange}) {
+    // // State is first added to the component that needs it for rendering (e.g., FavoriteAnimal component)
+    // // If other components also need it, you can lift it up to their closest common ancestor (e.g., name state resides in the App component and is used by both the Name component and the Display component)
+    // function Name({ name, onNameChange }) {
+    //   return (
+    //     <div>
+    //       <label>Name: </label>
+    //       <input value={name} onChange={onNameChange} />
+    //     </div>
+    //   );
+    // }
+
+    // function FavoriteAnimal() {
+    //   const [animal, setAnimal] = React.useState('');
+    //   return (
+    //     <div>
+    //       <label>Favorite Animal: </label>
+    //       <input
+    //         value={animal}
+    //         onChange={event => setAnimal(event.target.value)}
+    //       />
+    //     </div>
+    //   );
+    // }
+
+    // function Display({ name }) {
+    //   return <div>{`Hey ${name}, you are great!`}</div>;
+    // }
+
+    // function App() {
+    //   const [name, setName] = React.useState('');
+    //   return (
+    //     <form>
+    //       <Name
+    //         name={name}
+    //         onNameChange={event => setName(event.target.value)}
+    //       />
+    //       <FavoriteAnimal />
+    //       <Display name={name} />
+    //     </form>
+    //   );
+    // }
+
+    // Move the animal state to the App component so it can also be used in the Display component
+    function Name({ name, onNameChange }) {
       return (
         <div>
           <label>Name: </label>
           <input value={name} onChange={onNameChange} />
         </div>
-      )
+      );
     }
 
-    function FavoriteAnimal() {
-      const [animal, setAnimal] = React.useState('')
+    function FavoriteAnimal({ animal, onAnimalChange }) {
       return (
         <div>
           <label>Favorite Animal: </label>
-          <input
-            value={animal}
-            onChange={event => setAnimal(event.target.value)}
-          />
+          <input value={animal} onChange={onAnimalChange} />
         </div>
-      )
+      );
     }
 
-    function Display({name}) {
-      return <div>{`Hey ${name}, you are great!`}</div>
+    function Display({ name, animal }) {
+      return <div>{`Hey ${name}, you're favorite animal is ${animal}!`}</div>;
     }
 
     function App() {
-      const [name, setName] = React.useState('')
+      const [name, setName] = React.useState('');
+      const [animal, setAnimal] = React.useState('');
       return (
         <form>
           <Name
             name={name}
             onNameChange={event => setName(event.target.value)}
           />
-          <FavoriteAnimal />
-          <Display name={name} />
+          <FavoriteAnimal
+            animal={animal}
+            onAnimalChange={event => setAnimal(event.target.value)}
+          />
+          <Display name={name} animal={animal} />
         </form>
-      )
+      );
     }
 
-    ReactDOM.render(<App />, document.getElementById('root'))
+    ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
