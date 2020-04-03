@@ -5,18 +5,23 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
     function UsernameForm() {
-      const [username, setUsername] = React.useState('')
+      const [username, setUsername] = React.useState('');
+      // Remove isLowerCase and error
 
       function handleSubmit(event) {
-        event.preventDefault()
-        alert(`You entered: ${username}`)
+        event.preventDefault();
+        alert(`You entered: ${username}`);
       }
 
       function handleChange(event) {
-        setUsername(event.target.value.toLowerCase())
+        // Force any user input to be lowercase in conjunction with the value prop on the input element
+        setUsername(event.target.value.toLowerCase());
       }
 
       return (
+        // Add value prop to input element which will force any user input to be lowercase in conjunction with the handleChange function
+        // Remove div to display error message, but from a ux standpoint, it's probably a good idea to provide some sort of explanation for forcing the user input to be lowercase
+        // Remove boolean to disable submit button on error
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="usernameInput">Username:</label>
@@ -29,9 +34,9 @@
           </div>
           <button type="submit">Submit</button>
         </form>
-      )
+      );
     }
 
-    ReactDOM.render(<UsernameForm />, document.getElementById('root'))
+    ReactDOM.render(<UsernameForm />, document.getElementById('root'));
   </script>
 </body>
